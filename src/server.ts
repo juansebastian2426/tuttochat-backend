@@ -50,7 +50,7 @@ io.on('connection', async (socket) => {
   })
 })
 
-const port = 9876
+const port = process.env.PORT ?? 9876
 
 server.listen(port, function () {
   console.log(`Listening on port ${port}`)
