@@ -16,9 +16,12 @@ app.use(cors())
 
 const server = http.createServer(app)
 
+const corsAccess = process.env.CORS_ACCESS?.split(',')
+console.log(corsAccess)
+
 const io = new socketIO.Server(server, {
   cors: {
-    origin: ['http://localhost:5173'],
+    origin: corsAccess,
     methods: '*'
   }
 })
