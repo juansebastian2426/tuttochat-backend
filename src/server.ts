@@ -16,6 +16,7 @@ app.use(cors())
 
 const server = http.createServer(app)
 
+console.log(process.env.CORS_ACCESS)
 const corsAccess = process.env.CORS_ACCESS?.split(',')
 console.log(corsAccess)
 
