@@ -11,7 +11,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
-var _a;
+var _a, _b;
 Object.defineProperty(exports, "__esModule", { value: true });
 const dotenv_1 = require("dotenv");
 const express_1 = __importDefault(require("express"));
@@ -25,9 +25,11 @@ connection_1.MongoConnection.connect();
 const app = (0, express_1.default)();
 app.use((0, cors_1.default)());
 const server = http_1.default.createServer(app);
+const corsAccess = (_a = process.env.CORS_ACCESS) === null || _a === void 0 ? void 0 : _a.split(',');
+console.log(corsAccess);
 const io = new socket_io_1.default.Server(server, {
     cors: {
-        origin: ['http://localhost:5173'],
+        origin: corsAccess,
         methods: '*'
     }
 });
@@ -51,7 +53,7 @@ io.on('connection', (socket) => __awaiter(void 0, void 0, void 0, function* () {
         console.log(`Socket disconnected ${socket.id}`);
     });
 }));
-const port = (_a = process.env.PORT) !== null && _a !== void 0 ? _a : 9876;
+const port = (_b = process.env.PORT) !== null && _b !== void 0 ? _b : 9876;
 server.listen(port, function () {
     console.log(`Listening on port ${port}`);
 });
